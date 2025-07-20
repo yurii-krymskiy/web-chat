@@ -1,11 +1,14 @@
 import express from "express";
 import "dotenv/config";
 import http from "http";
+import userRouter from "./routes/userRoutes";
 
 const app = express();
 const server = http.createServer(app);
 
 app.use("/", (req, res) => res.send("Server is live"));
+
+app.use("/api/auth", userRouter);
 
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 5000;
