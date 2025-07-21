@@ -15,10 +15,14 @@ export type MessageType = {
   content: string;
   timestamp?: string;
   seen?: boolean;
+  image: string,
+  createdAt: string,
+  text: string
 };
 
 export type MessageInputType = {
-  content: string;
+  text?: string;
+  image?: string | ArrayBuffer | null;
 };
 
 export type UnseenMessagesMap = Record<string, number>;
@@ -35,4 +39,4 @@ export type ChatContextType = {
   setUnseenMessages: React.Dispatch<React.SetStateAction<UnseenMessagesMap>>;
 };
 
-export const ChatContext = createContext<ChatContextType | undefined>(undefined);
+export const ChatContext = createContext<ChatContextType>({} as ChatContextType);
