@@ -4,9 +4,7 @@ import toast from "react-hot-toast";
 import { io, Socket } from "socket.io-client"
 import { AuthContext, type AuthContextType, type CredentialsType, type UserType } from "./AuthContext";
 
-
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
-axios.defaults.baseURL = backendUrl;
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
@@ -69,7 +67,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const connectSocket = (userData: UserType) => {
     if (!userData || socket?.connected) return;
 
-    const newSocket = io(backendUrl, {
+    const newSocket = io(import.meta.env.VITE_BACKEND_URL, {
       query: {
         userId: userData._id,
       },
